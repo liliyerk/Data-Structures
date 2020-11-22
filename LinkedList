@@ -1,0 +1,130 @@
+class Node:
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+
+class SingleLinkedList:
+
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.size = 0
+
+    def insertFirst(self, obj):
+        new_node = Node(obj)
+        if self.first == None:
+            self.first = new_node
+            self.last = new_node
+            self.size += 1
+        else:
+            new_node.next = self.first
+            self.first = new_node
+            self.size += 1
+
+    def insertLast(self, obj):
+        new_node = Node(obj)
+        if self.last == None:
+            self.last = new_node
+            self.first = new_node
+            self.size += 1
+        else:
+            self.last.next = new_node
+            self.last = new_node
+            self.size += 1
+
+    def removeFirst(self):
+        if self.size == 0:
+            return
+        elif self.size == 1:
+            self.first = None
+            self.last = None
+            self.size -= 1
+        else:
+            tmp = self.first
+            self.first = self.first.next
+            tmp.next = None
+            self.size -= 1
+
+    def removeLast(self):
+        if self.size == 0:
+            return
+        elif self.size == 1:
+            self.first = None
+            self.last = None
+            self.size -= 1
+        else:
+            tmp =self.first
+            while tmp.next != self.last:
+                tmp = tmp.next
+            tmp.next = None
+            self.last = tmp
+            self.size -= 1
+
+    def insertAfter(self, targetData, obj):
+        new_node = Node(obj)
+        if self.size == 0:
+            return
+        else:
+            tmp = self.first
+            found = False
+            while tmp:
+                if tmp.data != targetData:
+                    tmp = tmp.next
+                else:
+                    found = True
+                    break
+            if tmp == self.last:
+                self.insertLast(obj)
+            elif found == True:
+                new_node.next = tmp.next
+                tmp.next = new_node
+                self.size += 1
+            else:
+                print("Your target data is not in the list.")
+
+    def insertBefore(self, targetData, obj):
+        new_node = Node(obj)
+        if self.size == 0:
+            return
+        else:
+            tmp = self.first
+            prev = self.first
+            found = False
+            while tmp:
+                if tmp.data != targetData:
+                    prev = tmp
+                    tmp = tmp.next
+                else:
+                    found = True
+                    break
+            if tmp == self.first:
+                self.insertFirst(obj)
+            elif found == True:
+                prev.next = new_node
+                new_node.next = tmp
+                self.size += 1
+            else:
+                print("Your target data is not in the list.")
+
+    def removeFirst(self):
+        tmp = self.first
+        self.first = tmp.next
+        tmp.next = None
+        self.size -= 1
+
+    def removeLast(self):
+        tmp = self.first
+        while tmp.next != self.last:
+            tmp = tmp.next
+        tmp.next = None
+        self.last = tmp
+        self.size -= 1
+
+    def listSize(self):
+        return  self.size
+
+    def printList(self):
+        tmp = self.first
+        while tmp != None:
+            print(tmp.data)
+            tmp = tmp.next
