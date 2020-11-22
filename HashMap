@@ -1,0 +1,74 @@
+class Entry:
+    def __init__(self,key, value):
+        self.key = key
+        self.value = value
+
+
+class HashMap:
+
+    def __init__(self):
+        self.capacity = 26
+        self.hashtable = [None] * self.capacity * 10
+        self.size = 0
+
+    def hash(self, key):
+        return ord(key[0]) % self.capacity
+
+    def put(self, key, value):
+        index = self.hash(key)
+        if self.hashtable[index] == None:
+            self.hashtable[index] = Entry(key, value)
+            self.size +=1
+            return None
+        for i in range(index, len(self.hashtable)):
+            if self.hashtable[i] != None:
+                if self.hashtable[i].key == key:
+                    old_val = self.hashtable[i].value
+                    self.hashtable[i].value = value
+                    return old_val
+                elif self.hash(self.hashtable[i].key) > index:
+                    self.hashtable.insert(i, Entry(key,value))
+                    self.size +=1
+                    return None
+            else:
+                self.hashtable[i] = Entry(key,value)
+                self.size +=1
+                return None
+
+    def remove(self,key):
+        index = self.hash(key)
+        for i in range(index, len(self.hashtable)):
+            curr_item = self.hashtable[i]
+            if curr_item.key == key:
+                self.hashtable.remove(curr_item)
+                break
+
+    def get(self, key):
+        index = self.hash(key)
+        for i in range(index, len(self.hashtable)):
+            if (self.hashtable[i] != None):
+                if key == self.hashtable[i].key:
+                    return self.hashtable[i].value
+        return None
+
+    def hasKey(self, key):
+        index = self.hash(key)
+        for i in range(index, len(self.hashtable)):
+            if (self.hashtable[i] != None):
+                if key == self.hashtable[i].key:
+                    return True
+        return False
+
+    def hasValue(self,value):
+        for i in self.hashtable:
+            if i != None:
+                if i.value == value:
+                    return True
+
+        return False
+
+    def print(self):
+        print("Printing key value pairs!!!")
+        for k in self.hashtable:
+            if k!=None:
+                print(k.key + ": " + k.value)
