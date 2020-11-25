@@ -104,3 +104,20 @@ class HashSet:
             while e != None:
                 print(e.data)
                 e = e.next
+HS = HashSet(100)
+HS.add("b")
+HS.add("aba")
+HS.add("a")
+HS.add("bao")
+HS.add("bib")
+
+print(HS.contains("a"))
+print(HS.contains("c"))
+s = HashSet(100)
+s.add("z")
+s.add("bob")
+s.add("a")
+
+for elem in HS.levelOrderedIter():
+    print(elem)
+HS.levelOrderedIterQueue()
