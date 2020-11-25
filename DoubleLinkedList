@@ -106,3 +106,24 @@ class DoubleLinkedList:
 
     def first(self):
         return self.head.data
+
+
+
+def main():
+    dll = DoubleLinkedList()
+    dll.add_first(56)
+    dll.add_last(89)
+    dll.add_last(85)
+    dll.add_first(656)
+    dll.insert_after(555,85)
+    dll.insert_before(1984, 56)
+    dll.insert_before(78, 85)
+    dll.insert_after(64,85)
+    dll.del_last()
+    dll.del_first()
+    dll.print_list()
+    # print(dll.first())
+    # print(dll.last())
+    dll.rearrange()
+
+main()
