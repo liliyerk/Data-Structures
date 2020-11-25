@@ -72,3 +72,25 @@ class HashMap:
         for k in self.hashtable:
             if k!=None:
                 print(k.key + ": " + k.value)
+                
+ HM = HashMap()
+
+HM.put("ab", "abernathy")
+HM.put("aa","aaron")
+HM.put("bob", "basba")
+HM.put("cic", "camo")
+HM.put("ci", "cicllia")
+HM.put("ba", "barry")
+HM.put("bb", "bibi")
+
+# HM.remove("aa")
+# HM.remove("ba")
+print(HM.get("cic"))
+HM.print()
+HM.remove("ab")
+HM.put("aa", "amo")
+HM.print()
+print(HM.hasKey("ab"))
+print(HM.hasKey("cic"))
+print(HM.hasValue("amo"))
+print(HM.hasValue("naah"))
