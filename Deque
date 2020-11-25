@@ -67,3 +67,16 @@ class LinkedDeque:
 
     def first(self):
         return self.head.data
+
+def main():
+    lilid = LinkedDequeue()
+    lilid.add_front("dog")
+    lilid.add_rear("cat")
+    lilid.add_front("chicken")
+    lilid.add_rear("lobster")
+    lilid.print_list()
+    lilid.remove_front()
+    lilid.remove_rear()
+    lilid.print_list()
+
+main()
