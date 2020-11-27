@@ -1,5 +1,5 @@
 class Entry:
-    def __init__(self,key, value):
+    def __init__(self, key, value):
         self.key = key
         self.value = value
 
@@ -12,54 +12,50 @@ class HashMap:
         self.size = 0
 
     def hash(self, key):
-        return ord(key[0]) % self.capacity
+        p = 31
+        length = len(key)
+        hash = 0
+        for i in range(0, length):
+            hash = hash + ord(key[i]) * p ** i
+            i += 1
+        hash = hash % len(self.hashtable)
+        return hash
 
     def put(self, key, value):
         index = self.hash(key)
         if self.hashtable[index] == None:
             self.hashtable[index] = Entry(key, value)
-            self.size +=1
+            self.size += 1
             return None
-        for i in range(index, len(self.hashtable)):
-            if self.hashtable[i] != None:
-                if self.hashtable[i].key == key:
-                    old_val = self.hashtable[i].value
-                    self.hashtable[i].value = value
-                    return old_val
-                elif self.hash(self.hashtable[i].key) > index:
-                    self.hashtable.insert(i, Entry(key,value))
-                    self.size +=1
-                    return None
-            else:
-                self.hashtable[i] = Entry(key,value)
-                self.size +=1
-                return None
 
-    def remove(self,key):
+        else:
+            if self.hashtable[index].value != value:
+                old_val = self.hashtable[index].value
+                self.hashtable[index].value = value
+                return old_val
+            else:
+                print("The key is already in the hashmap")
+
+    def remove(self, key):
         index = self.hash(key)
-        for i in range(index, len(self.hashtable)):
-            curr_item = self.hashtable[i]
-            if curr_item.key == key:
-                self.hashtable.remove(curr_item)
-                break
+        curr_item = self.hashtable[index]
+        if curr_item.key == key:
+            self.hashtable.remove(curr_item)
 
     def get(self, key):
         index = self.hash(key)
-        for i in range(index, len(self.hashtable)):
-            if (self.hashtable[i] != None):
-                if key == self.hashtable[i].key:
-                    return self.hashtable[i].value
-        return None
+        if self.hashtable[index] != None:
+            if self.hashtable[index].key == key:
+                return self.hashtable[index].value
 
     def hasKey(self, key):
         index = self.hash(key)
-        for i in range(index, len(self.hashtable)):
-            if (self.hashtable[i] != None):
-                if key == self.hashtable[i].key:
-                    return True
+        if self.hashtable[index] != None:
+            if self.hashtable[index].key == key:
+                return True
         return False
 
-    def hasValue(self,value):
+    def hasValue(self, value):
         for i in self.hashtable:
             if i != None:
                 if i.value == value:
@@ -70,13 +66,16 @@ class HashMap:
     def print(self):
         print("Printing key value pairs!!!")
         for k in self.hashtable:
-            if k!=None:
+            if k != None:
                 print(k.key + ": " + k.value)
-                
- HM = HashMap()
+
+
+HM = HashMap()
 
 HM.put("ab", "abernathy")
-HM.put("aa","aaron")
+print(HM.hasKey("ab"))
+
+HM.put("aa", "aaron")
 HM.put("bob", "basba")
 HM.put("cic", "camo")
 HM.put("ci", "cicllia")
@@ -86,10 +85,10 @@ HM.put("bb", "bibi")
 # HM.remove("aa")
 # HM.remove("ba")
 print(HM.get("cic"))
-HM.print()
-HM.remove("ab")
-HM.put("aa", "amo")
-HM.print()
+# HM.print()
+# HM.remove("ab")
+# HM.put("aa", "amo")
+# HM.print()
 print(HM.hasKey("ab"))
 print(HM.hasKey("cic"))
 print(HM.hasValue("amo"))
