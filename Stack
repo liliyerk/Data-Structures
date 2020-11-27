@@ -44,3 +44,18 @@ class Stack:
     def empty(self):
         self.top = None
         self.size = 0
+        
+def main():
+    stack = Stack()
+    stack.push(5)
+    stack.push(6)
+    stack.push(8)
+    stack.print_stack()
+    stack.pop()
+    stack.print_stack()
+    print(stack.Top())
+    print(stack.isEmpty())
+    stack.empty()
+    print(stack.print_stack())
+    
+main()
