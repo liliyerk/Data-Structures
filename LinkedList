@@ -128,3 +128,17 @@ class SingleLinkedList:
         while tmp != None:
             print(tmp.data)
             tmp = tmp.next
+           
+ def main():
+    SLL = SingleLinkedList()
+    SLL.insertFirst(5)
+    SLL.insertFirst(6)
+    SLL.insertLast(8)
+    SLL.insertAfter(8,15)
+    SLL.insertBefore(6,75)
+    SLL.removeFirst()
+    SLL.removeLast()
+    print(SLL.listSize())
+    SLL.printList()
+
+main()
