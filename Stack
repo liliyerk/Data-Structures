@@ -45,6 +45,12 @@ class Stack:
         self.top = None
         self.size = 0
         
+    def print_stack(self):
+        curr = self.top
+        while curr != None:
+            print(curr.data)
+            curr = curr.next
+        
 def main():
     stack = Stack()
     stack.push(5)
