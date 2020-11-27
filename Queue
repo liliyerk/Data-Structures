@@ -5,7 +5,7 @@ class ArrayQueue():
         self.first = 0
         self.size = 0
 
-    def size(self):
+    def array_size(self):
         return self.size
 
     def isEmpty(self):
@@ -17,12 +17,51 @@ class ArrayQueue():
 
     def enqueue(self, obj):
         if self.size == len(self.queue):
-            return "The queue is full. Please try later!"
-        self.queue[(self.first + self.size) % len(self.queue)] = obj
-        self.size += 1
+            print("The queue is full. Please try later!")
+        else:
+            self.queue[(self.first + self.size) % len(self.queue)] = obj
+            self.size += 1
 
-    def dequeue(self, obj):
+
+
+    def dequeue(self):
         if self.size == 0:
             return "The queue is empty."
+        self.queue[self.first] = None
         self.first = (self.first + 1) % len(self.queue)
         self.size -= 1
+
+    def print_queue(self):
+        for i in range(0, self.capacity):
+            if self.queue[i] != None:
+                print(self.queue[i])
+
+
+
+def main():
+    q = ArrayQueue(8)
+    q.enqueue(6)
+    q.enqueue(9)
+    q.enqueue(8)
+    q.enqueue(9)
+    q.enqueue(7)
+    q.enqueue(89)
+    q.enqueue(87)
+    q.enqueue(2001)
+    q.print_queue()
+    q.dequeue()
+    q.print_queue()
+    q.dequeue()
+    q.print_queue()
+    q.enqueue(66)
+    q.print_queue()
+    q.enqueue(96)
+    q.print_queue()
+    q.dequeue()
+    q.print_queue()
+
+
+
+
+
+main()
